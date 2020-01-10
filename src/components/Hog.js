@@ -4,50 +4,27 @@ import React from 'react';
 
 class Hog extends React.Component{
     state = {
-        selectedDisplay: {
-            "Mudblood": 'hide',
-            "Porkchop":  'hide',
-            "Cherub":  'hide',
-            "Piggy smalls":  'hide',
-            "Trouble":  'hide',
-            "Sobriety":  'hide',
-            "Rainbowdash": 'hide',
-            "TruffleShuffle":  'hide',
-            "Bay of Pigs":  'hide',
-            "The Prosciutto Concern": 'hide',
-            "Galaxy Note":  'hide', 
-            "Leggo My Eggo":  'hide',
-            "Augustus Gloop":  'hide'
-        }
+        display: false
     };
 
-    showHogInfo = (piglet) => {
+    showHogInfo = () => {
         // console.log(piglet)
         this.setState({
-            selectedDisplay: {
-                ...this.state.selectedDisplay,
-               [piglet.name]: this.state.selectedDisplay[piglet.name] === 'hide' ? 'show' : 'hide'
-            }   
+            display: !this.state.display
         }); 
     };
 
     hogDisplay = (piglet, mugshots) => {
         return(
-            <li className='pigTile' >
+            <div className='ui eight wide column'>
+            <div onClick={this.showHogInfo}>
+                <img src={mugshots}/>
+                <h3>{piglet.name}</h3>
+            </div>    
                 {
-                this.state.selectedDisplay[piglet.name] === 'hide' && 
+                this.state.display &&
                     <div 
-                    style={{backgroundImage:`url(${mugshots[piglet.name]})`}}
-                    onClick={() => this.showHogInfo(piglet)}>
-                        <h3> {piglet.name} </h3>
-                    </div>
-                }
-    
-                {
-                this.state.selectedDisplay[piglet.name] === 'show' && 
-                    <div 
-                    onClick={()=>this.showHogInfo(piglet)}>
-                        <h2> {piglet.name} </h2>
+                    onClick={this.showHogInfo}>
                         <p id='piggie-info'>
                             {piglet.name}'s speciatly is: {piglet.specialty}. <br></br>
                             {piglet.greased === true ? `${piglet.name} is greased.` : `${piglet.name} is not greased`}.<br></br>
@@ -56,7 +33,7 @@ class Hog extends React.Component{
                         </p>
                     </div>
                 }   
-            </li>                 
+           </div>
         )     
     };
     render(){
@@ -72,3 +49,6 @@ class Hog extends React.Component{
 }
 
 export default Hog; 
+
+
+

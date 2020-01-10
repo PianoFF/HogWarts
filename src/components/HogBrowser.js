@@ -41,11 +41,9 @@ class HogBrowser extends React.Component {
 
         return(
             <div className="ui grid container">
-                <ul>
                     {piggies.map(piglet => 
-                        <Hog mugshots={mugshots} piglet={piglet}/>
+                        <Hog mugshots={mugshots[piglet.name]} piglet={piglet}/>
                     )}
-                </ul>
             </div>
         )
     }
