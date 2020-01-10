@@ -1,6 +1,5 @@
 import React from 'react';
 import Hog from './Hog';
-import HogInfo from './HogInfo';
 import augustus_gloop from '../hog-imgs/augustus_gloop.jpg';
 import bay_of_pigs from '../hog-imgs/bay_of_pigs.jpg';
 import cherub from '../hog-imgs/cherub.jpg';
@@ -34,49 +33,19 @@ const mugshots = {
   }
 
 class HogBrowser extends React.Component {
-    state = {
-        selectedDisplay: {
-            "Mudblood": 'hog',
-            "Porkchop": 'hog',
-            "Cherub": 'hog',
-            "Piggy smalls": 'hog',
-            "Trouble": 'hog',
-            "Sobriety": 'hog',
-            "Rainbowdash": 'hog',
-            "TruffleShuffle": 'hog',
-            "Bay of Pigs": 'hog',
-            "The Prosciutto Concern": 'hog',
-            "Galaxy Note": 'hog', 
-            "Leggo My Eggo": 'hog',
-            "Augustus Gloop": 'hog'
-        }
-    }
 
-    showHogInfo = (piglet) => {
-        this.state.selectedDisplay[piglet.name] = this.state.selectedDisplay[piglet.name] === 'hog' ? 'hogInfo' : 'hog'
-        this.setState({}); 
-        console.log(piglet)
-    }
+
 
     render(){
-        const hogDisplay = (piglet) => {
-            return(
-                <div>
-                    {this.state.selectedDisplay[piglet.name] === 'hog' && 
-                    <Hog piglet={piglet} mugshots={mugshots} showHog={this.showHogInfo}/>}
-
-                    {this.state.selectedDisplay[piglet.name] === 'hogInfo' && 
-                    <HogInfo piglet={piglet} mugshots={mugshots} showHog={this.showHogInfo}/>}                    
-                </div>
-            )     
-        }
         const {piggies} = this.props
 
         return(
             <div className="ui grid container">
-                {piggies.map(piglet => 
-                    hogDisplay(piglet)
-                )}
+                <ul>
+                    {piggies.map(piglet => 
+                        <Hog mugshots={mugshots} piglet={piglet}/>
+                    )}
+                </ul>
             </div>
         )
     }
