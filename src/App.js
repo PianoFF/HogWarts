@@ -6,6 +6,8 @@ import HogBrowser from './components/HogBrowser';
 class App extends Component {
   state ={
     hogs:[],
+    greased: false,
+    weight: false,
   }
 
   
